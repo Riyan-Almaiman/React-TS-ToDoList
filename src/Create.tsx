@@ -160,7 +160,7 @@ return(
 <>
      <Container   flexDirection={'column-reverse'} className = "f" display="flex" >{transition((style,item)=> item && task.id!=id || upd ? <animated.div  style = {style}>
 
-<Card  border= "1px"  mb= "20px"  bg = {task.complete  ? "green.200": '#e1bf92	'}  mt= "30px"  width = "auto" variant="filled" align='center'>
+<Card boxShadow={"2xl"}  border= "1px"  mb= "20px"  bg = {task.complete  ? "green.200": '#e1bf92	'}  mt= "30px"  width = "auto" variant="filled" align='center'>
 
 <Container><CardBody bg = {task.complete  ? "green.200": '#e1bf92	'}  >
 <Container><Text    bg = {task.complete  ? "green.200": '#e1bf92	'}  >{task.task}</Text> </Container>
@@ -168,9 +168,13 @@ return(
 <CardFooter bg = {task.complete  ? "green.200": '#e1bf92	'} >
 <Button colorScheme = "cyan"onClick={()=>{Test(task.id)}}>Update</Button>            
 
-    <p>{upd && task.id == id ? <><Input bg="blue.200" onChange ={e=>{setTask(e.target.value)}} ></Input> <Button colorScheme = "green" onClick={()=>{UpdateData(task.id) }}>Save</Button></>: null} </p>  {upd && task.id == id ? null : <>{task.complete == true ? "":<p>  <Button  colorScheme = "green" onClick={()=>{Test1(task.id); task.complete=true;}}>Mark as Completed</Button> </p>}<p> <Button  colorScheme = "red" onClick={()=>{Delete(task.id)}}>Delete</Button></p></>}
+    <p>{upd && task.id == id ? <><Input bg="blue.200" onChange ={e=>{setTask(e.target.value)}} ></Input> <Button colorScheme = "green" onClick={()=>{UpdateData(task.id) }}>Save</Button></>: null} </p> 
+     {upd && task.id == id ? null : <>{task.complete == true ? "":<p>  <Button  colorScheme = "green" onClick={()=>{Test1(task.id); task.complete=true;}}>Mark as Completed</Button> </p>}<p> <Button  colorScheme = "red" onClick={()=>{Delete(task.id)}}>Delete</Button></p></>}
 </CardFooter>
-</Card></animated.div>:null)} </Container>
+</Card>
+</animated.div>:null)} 
+
+</Container>
 
    </>
              
