@@ -7,14 +7,13 @@ function Create() {
     const[task, setTask] = React.useState<any>()
     const[upd, setUpdate] = React.useState(false)
     const[id, setID] = React.useState("")
-    let test:any=[]
+    const[complete, setComplete] = React.useState(false)
 
     const[tasks, setTasks] = React.useState<any[]>([])
 
     React.useEffect( ()=> {   
         axios.get("https://63e208d4ad0093bf29c65b2d.mockapi.io/ToDo")
         .then(response=>{
-            test = response.data
             console.log(response.data)
             setTasks([...response.data])
                 
@@ -77,7 +76,6 @@ function Create() {
 
        await axios.get("https://63e208d4ad0093bf29c65b2d.mockapi.io/ToDo")
         .then(response=>{
-            test = response.data
             console.log(response.data)
             setTasks([...response.data])
                 
@@ -96,6 +94,12 @@ function Create() {
         setUpdate(true)
     
     }
+    function Test1(i:string){
+        
+        setID(i)
+        setComplete(true)
+    
+    }
 
   return (
 
@@ -112,17 +116,17 @@ function Create() {
 
 return(
 
-    <Container >
+    <Container display="flex" >
 
-        <Card  mt= "30px" display="flex" width = "300px" variant="filled" align='center'>
+        <Card  display="flex"  bg = {complete && task.id == id ? "green.300": 'gray.300'}  mt= "30px" display="flex" width = "300px" variant="filled" align='center'>
    
   <CardBody>
     <Text isTruncated >{task.task}</Text>
   </CardBody>
   <CardFooter>
-  <Button colorScheme = "cyan"onClick={()=>{Test(task.id)}}>Update</Button>             <Button  colorScheme = "red" onClick={()=>{Delete(task.id)}}>Delete</Button>
+  <Button colorScheme = "cyan"onClick={()=>{Test(task.id)}}>Update</Button>            
 
-            {upd && task.id == id ? <><Input onChange ={e=>{setTask(e.target.value)}} ></Input> <Button colorScheme = "green" onClick={()=>{UpdateData(task.id)}}>Save</Button></>: null}
+            <p>{upd && task.id == id ? <><Input bg="blue.200" onChange ={e=>{setTask(e.target.value)}} ></Input> <Button colorScheme = "green" onClick={()=>{UpdateData(task.id)}}>Save</Button></>: null} </p>  <p> <Button  colorScheme = "green" onClick={()=>{Test1(task.id)}}>Mark as Completed</Button> </p><p> <Button  colorScheme = "red" onClick={()=>{Delete(task.id)}}>Delete</Button></p>
   </CardFooter>
 </Card> </Container>
              
