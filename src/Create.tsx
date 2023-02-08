@@ -116,9 +116,9 @@ function Create() {
 
 return(
 
-    <Container display="flex" >
+    <Container  flex="wrap"display="flex" >
 
-        <Card  display="flex"  bg = {complete && task.id == id ? "green.300": 'gray.300'}  mt= "30px" display="flex" width = "300px" variant="filled" align='center'>
+        <Card  display="flex"  bg = {complete && task.id == id ? "green.300": 'gray.300'}  mt= "30px"  width = "300px" variant="filled" align='center'>
    
   <CardBody>
     <Text isTruncated >{task.task}</Text>
