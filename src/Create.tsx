@@ -7,7 +7,7 @@ function Create() {
     const[task, setTask] = React.useState<any>()
     const[upd, setUpdate] = React.useState(false)
     const[id, setID] = React.useState("")
-    const[complete, setComplete] = React.useState(false)
+    const[complete, setComplete] = React.useState()
 
     const[tasks, setTasks] = React.useState<any[]>([])
 
@@ -43,7 +43,8 @@ function Create() {
 
         await  axios.put("https://63e208d4ad0093bf29c65b2d.mockapi.io/ToDo"+"/"+i, {
   
-          task
+          task,
+          complete
   
   
           }).then(res=>{console.log(res)})
@@ -67,7 +68,8 @@ function Create() {
 
       await  axios.post("https://63e208d4ad0093bf29c65b2d.mockapi.io/ToDo", {
 
-        task
+        task,
+        complete
 
 
         }).then(res=>{console.log(res)})
@@ -94,11 +96,26 @@ function Create() {
         setUpdate(true)
     
     }
-    function Test1(i:string){
+   async function Test1(i:string){
         
-        setID(i)
-        setComplete(true)
-    
+        await  axios.put("https://63e208d4ad0093bf29c65b2d.mockapi.io/ToDo"+"/"+i, {
+  
+        task,
+        complete:true
+
+
+        }).then(res=>{console.log(res)})
+        
+        console.log(tasks) 
+
+       await axios.get("https://63e208d4ad0093bf29c65b2d.mockapi.io/ToDo")
+        .then(response=>{
+            console.log(response.data)
+            setTasks([...response.data])
+                
+
+
+        })
     }
 
   return (
@@ -118,7 +135,7 @@ return(
 
     <Container  flex="wrap"display="flex" >
 
-        <Card  display="flex"  bg = {complete && task.id == id ? "green.300": 'gray.300'}  mt= "30px"  width = "auto" variant="filled" align='center'>
+        <Card  display="flex"  bg = {task.complete  ? "green.300": 'gray.300'}  mt= "30px"  width = "auto" variant="filled" align='center'>
    
   <CardBody>
     <Text >{task.task}</Text>
@@ -126,7 +143,7 @@ return(
   <CardFooter>
   <Button colorScheme = "cyan"onClick={()=>{Test(task.id)}}>Update</Button>            
 
-            <p>{upd && task.id == id ? <><Input bg="blue.200" onChange ={e=>{setTask(e.target.value)}} ></Input> <Button colorScheme = "green" onClick={()=>{UpdateData(task.id)}}>Save</Button></>: null} </p>  <p> <Button  colorScheme = "green" onClick={()=>{Test1(task.id)}}>Mark as Completed</Button> </p><p> <Button  colorScheme = "red" onClick={()=>{Delete(task.id)}}>Delete</Button></p>
+            <p>{upd && task.id == id ? <><Input bg="blue.200" onChange ={e=>{setTask(e.target.value)}} ></Input> <Button colorScheme = "green" onClick={()=>{UpdateData(task.id) }}>Save</Button></>: null} </p>  <p> <Button  colorScheme = "green" onClick={()=>{Test1(task.id); task.complete=true;}}>Mark as Completed</Button> </p><p> <Button  colorScheme = "red" onClick={()=>{Delete(task.id)}}>Delete</Button></p>
   </CardFooter>
 </Card> </Container>
              
