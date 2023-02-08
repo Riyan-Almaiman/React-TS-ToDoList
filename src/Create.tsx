@@ -84,7 +84,7 @@ function Create() {
       }
     async function PostData():Promise<any>{
 
-        
+        if(task=="")return
       await  axios.post("https://63e208d4ad0093bf29c65b2d.mockapi.io/ToDo", {
 
         task,
@@ -104,23 +104,24 @@ function Create() {
 
         })
     
+        setTask("")
 
 
      
     }
  let current:String; 
     function Test(i:string){
+
         setdelete(true)
         setID(i)
         setUpdate(true)
     
     }
    async function Test1(i:string){
-        
+
         
         await  axios.put("https://63e208d4ad0093bf29c65b2d.mockapi.io/ToDo"+"/"+i, {
   
-        task,
         complete:true
 
 
@@ -145,7 +146,7 @@ function Create() {
 
         <Container mt="20px" className = "f"   >
 
-        <p><Input bg = "white"mt = "44px" onChange ={e=>{setTask(e.target.value)}} placeholder="Task" ></Input></p>
+        <p><Input bg = "white"mt = "44px" value={task} onChange ={e=>{setTask(e.target.value)}} placeholder="Task" ></Input></p>
 
         <Button mb= "20px"width="30%" mt = "20px"ml="35%" onClick={()=>PostData()} >Create Task</Button>    </Container>
         {tasks.map((task)=>{
@@ -155,7 +156,7 @@ return(
 <>
      <Container   flexDirection={'column-reverse'} className = "f" display="flex" >{transition((style,item)=> item && task.id!=id || upd ? <animated.div  style = {style}>
 
-<Card    bg = {task.complete  ? "green.200": '#e1bf92	'}  mt= "30px"  width = "auto" variant="filled" align='center'>
+<Card  mb= "20px"  bg = {task.complete  ? "green.200": '#e1bf92	'}  mt= "30px"  width = "auto" variant="filled" align='center'>
 
 <Container><CardBody bg = {task.complete  ? "green.200": '#e1bf92	'}  >
 <Container><Text    bg = {task.complete  ? "green.200": '#e1bf92	'}  >{task.task}</Text> </Container>
