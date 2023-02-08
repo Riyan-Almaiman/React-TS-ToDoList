@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
 import { Box, Button, Card, CardBody, CardFooter, CardHeader, Container, Heading, Input, Text} from '@chakra-ui/react'
+import { animated, useTransition } from 'react-spring'
 //https://63e208d4ad0093bf29c65b2d.mockapi.io/ToDo
 
 function Create() {
@@ -8,6 +9,13 @@ function Create() {
     const[upd, setUpdate] = React.useState(false)
     const[id, setID] = React.useState("")
     const[complete, setComplete] = React.useState()
+    const[del, setdelete] = React.useState(true)
+
+    const transition = useTransition(del,{
+        enter:{x:0, y:0, opacity:1},
+        from:{x:500, y:0, opacity:1},
+        leave: {x:0, y:0, opacity:1},
+    })
 
     const[tasks, setTasks] = React.useState<any[]>([])
 
@@ -23,6 +31,9 @@ function Create() {
     },[])
     async function Delete(i:any):Promise<any>{
 
+        setID(id)
+        setdelete(false)
+
         await  axios.delete("https://63e208d4ad0093bf29c65b2d.mockapi.io/ToDo"+"/"+i)
           
           console.log(tasks) 
@@ -35,12 +46,15 @@ function Create() {
   
   
           })
-      
+          setdelete(true)
+
+
           
        
       }
     async function UpdateData(i:any):Promise<any>{
 
+        setID("")
         await  axios.put("https://63e208d4ad0093bf29c65b2d.mockapi.io/ToDo"+"/"+i, {
   
           task,
@@ -61,7 +75,9 @@ function Create() {
           })
       
           setUpdate(false)
-          
+        
+
+
        
       }
     async function PostData():Promise<any>{
@@ -91,12 +107,13 @@ function Create() {
     }
  let current:String; 
     function Test(i:string){
-        
+        setdelete(true)
         setID(i)
         setUpdate(true)
     
     }
    async function Test1(i:string){
+        
         
         await  axios.put("https://63e208d4ad0093bf29c65b2d.mockapi.io/ToDo"+"/"+i, {
   
@@ -132,20 +149,22 @@ function Create() {
 
 
 return(
+<>
+     <Container  flex="wrap"display="flex" >{transition((style,item)=> item && task.id!=id || upd ? <animated.div style = {style}>
 
-    <Container  flex="wrap"display="flex" >
+<Card  display="flex"  bg = {task.complete  ? "green.300": 'gray.300'}  mt= "30px"  width = "auto" variant="filled" align='center'>
 
-        <Card  display="flex"  bg = {task.complete  ? "green.300": 'gray.300'}  mt= "30px"  width = "auto" variant="filled" align='center'>
-   
-  <CardBody>
-    <Text >{task.task}</Text>
-  </CardBody>
-  <CardFooter>
-  <Button colorScheme = "cyan"onClick={()=>{Test(task.id)}}>Update</Button>            
+<CardBody>
+<Text >{task.task}</Text>
+</CardBody>
+<CardFooter>
+<Button colorScheme = "cyan"onClick={()=>{Test(task.id)}}>Update</Button>            
 
-            <p>{upd && task.id == id ? <><Input bg="blue.200" onChange ={e=>{setTask(e.target.value)}} ></Input> <Button colorScheme = "green" onClick={()=>{UpdateData(task.id) }}>Save</Button></>: null} </p>  {upd && task.id == id ? null : <><p> <Button  colorScheme = "green" onClick={()=>{Test1(task.id); task.complete=true;}}>Mark as Completed</Button> </p><p> <Button  colorScheme = "red" onClick={()=>{Delete(task.id)}}>Delete</Button></p></>}
-  </CardFooter>
-</Card> </Container>
+    <p>{upd && task.id == id ? <><Input bg="blue.200" onChange ={e=>{setTask(e.target.value)}} ></Input> <Button colorScheme = "green" onClick={()=>{UpdateData(task.id) }}>Save</Button></>: null} </p>  {upd && task.id == id ? null : <><p> <Button  colorScheme = "green" onClick={()=>{Test1(task.id); task.complete=true;}}>Mark as Completed</Button> </p><p> <Button  colorScheme = "red" onClick={()=>{Delete(task.id)}}>Delete</Button></p></>}
+</CardFooter>
+</Card></animated.div>:null)} </Container>
+
+   </>
              
 
     
