@@ -6,7 +6,7 @@ import { animated, useTransition } from 'react-spring'
 //https://63e208d4ad0093bf29c65b2d.mockapi.io/ToDo
 
 function Create() {
-    const[task, setTask] = React.useState<any>()
+    const[task, setTask] = React.useState<any>("")
     const[upd, setUpdate] = React.useState(false)
     const[id, setID] = React.useState("")
     const[complete, setComplete] = React.useState()
@@ -156,7 +156,7 @@ return(
 <>
      <Container   flexDirection={'column-reverse'} className = "f" display="flex" >{transition((style,item)=> item && task.id!=id || upd ? <animated.div  style = {style}>
 
-<Card  mb= "20px"  bg = {task.complete  ? "green.200": '#e1bf92	'}  mt= "30px"  width = "auto" variant="filled" align='center'>
+<Card  border= "1px"  mb= "20px"  bg = {task.complete  ? "green.200": '#e1bf92	'}  mt= "30px"  width = "auto" variant="filled" align='center'>
 
 <Container><CardBody bg = {task.complete  ? "green.200": '#e1bf92	'}  >
 <Container><Text    bg = {task.complete  ? "green.200": '#e1bf92	'}  >{task.task}</Text> </Container>
