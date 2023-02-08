@@ -145,7 +145,7 @@ function Create() {
 
         <Container mt="20px" className = "f"   >
 
-        <p><Input mt = "44px" onChange ={e=>{setTask(e.target.value)}} placeholder="Task" ></Input></p>
+        <p><Input bg = "white"mt = "44px" onChange ={e=>{setTask(e.target.value)}} placeholder="Task" ></Input></p>
 
         <Button mb= "20px"width="30%" mt = "20px"ml="35%" onClick={()=>PostData()} >Create Task</Button>    </Container>
         {tasks.map((task)=>{
@@ -155,12 +155,12 @@ return(
 <>
      <Container   flexDirection={'column-reverse'} className = "f" display="flex" >{transition((style,item)=> item && task.id!=id || upd ? <animated.div  style = {style}>
 
-<Card    bg = {task.complete  ? "green.300": 'gray.300'}  mt= "30px"  width = "auto" variant="filled" align='center'>
+<Card    bg = {task.complete  ? "green.200": '#e1bf92	'}  mt= "30px"  width = "auto" variant="filled" align='center'>
 
-<Container><CardBody bg = {task.complete  ? "green.300": 'gray.300'}  >
-<Container><Text    bg = {task.complete  ? "green.300": 'gray.300'}  >{task.task}</Text> </Container>
+<Container><CardBody bg = {task.complete  ? "green.200": '#e1bf92	'}  >
+<Container><Text    bg = {task.complete  ? "green.200": '#e1bf92	'}  >{task.task}</Text> </Container>
 </CardBody></Container>
-<CardFooter bg = {task.complete  ? "green.300": 'gray.300'} >
+<CardFooter bg = {task.complete  ? "green.200": '#e1bf92	'} >
 <Button colorScheme = "cyan"onClick={()=>{Test(task.id)}}>Update</Button>            
 
     <p>{upd && task.id == id ? <><Input bg="blue.200" onChange ={e=>{setTask(e.target.value)}} ></Input> <Button colorScheme = "green" onClick={()=>{UpdateData(task.id) }}>Save</Button></>: null} </p>  {upd && task.id == id ? null : <><p> <Button  colorScheme = "green" onClick={()=>{Test1(task.id); task.complete=true;}}>Mark as Completed</Button> </p><p> <Button  colorScheme = "red" onClick={()=>{Delete(task.id)}}>Delete</Button></p></>}
