@@ -76,6 +76,7 @@ function Create() {
           })
       
           setUpdate(false)
+          setTask("")
         
 
 
@@ -83,6 +84,7 @@ function Create() {
       }
     async function PostData():Promise<any>{
 
+        
       await  axios.post("https://63e208d4ad0093bf29c65b2d.mockapi.io/ToDo", {
 
         task,
@@ -103,7 +105,7 @@ function Create() {
         })
     
 
-        
+
      
     }
  let current:String; 
@@ -145,7 +147,7 @@ function Create() {
 
         <p><Input mt = "44px" onChange ={e=>{setTask(e.target.value)}} placeholder="Task" ></Input></p>
 
-        <Button mb= "20px"width="30%" mt = "20px"ml="35%" onClick={()=>PostData()} >Add a Task</Button>    </Container>
+        <Button mb= "20px"width="30%" mt = "20px"ml="35%" onClick={()=>PostData()} >Create Task</Button>    </Container>
         {tasks.map((task)=>{
 
 
