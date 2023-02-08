@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
-import { Box, Button, Container, Input } from '@chakra-ui/react'
+import { Box, Button, Card, CardBody, CardFooter, CardHeader, Container, Heading, Input, Text} from '@chakra-ui/react'
 //https://63e208d4ad0093bf29c65b2d.mockapi.io/ToDo
 
 function Create() {
@@ -89,7 +89,13 @@ function Create() {
         
      
     }
- 
+ let current:String; 
+    function Test(i:string){
+        
+        setID(i)
+        setUpdate(true)
+    
+    }
 
   return (
 
@@ -100,23 +106,28 @@ function Create() {
 
         <p><Input mt = "44px" onChange ={e=>{setTask(e.target.value)}} placeholder="Task" ></Input></p>
 
-        <Button width="30%" mt = "20px"ml="35%" onClick={()=>PostData()} >Add</Button>    </Container>
+        <Button width="30%" mt = "20px"ml="35%" onClick={()=>PostData()} >Add a Task</Button>    </Container>
         {tasks.map((task)=>{
 
 
 return(
 
-        <>
-             <Container display='flex' ><Box fontSize="20px" mt="20px" border = "1px" >
-            <p>{task.task}</p> 
-            
-            <Button  onClick={()=>{Delete(task.id)}}>Delete</Button>
-            
-            
-            <Button onClick={()=>{setUpdate(true)}}>Update</Button>
-            {upd ? <><Input onChange ={e=>{setTask(e.target.value)}} ></Input> <Button onClick={()=>{UpdateData(task.id)}}>Save</Button></>: null}</Box></Container>
+    <Container >
 
-        </>
+        <Card  mt= "30px" display="flex" width = "300px" variant="filled" align='center'>
+   
+  <CardBody>
+    <Text isTruncated >{task.task}</Text>
+  </CardBody>
+  <CardFooter>
+  <Button colorScheme = "cyan"onClick={()=>{Test(task.id)}}>Update</Button>             <Button  colorScheme = "red" onClick={()=>{Delete(task.id)}}>Delete</Button>
+
+            {upd && task.id == id ? <><Input onChange ={e=>{setTask(e.target.value)}} ></Input> <Button colorScheme = "green" onClick={()=>{UpdateData(task.id)}}>Save</Button></>: null}
+  </CardFooter>
+</Card> </Container>
+             
+
+    
         
 )
 
