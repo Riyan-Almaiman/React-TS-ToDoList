@@ -166,10 +166,10 @@ return(
 <Container><Text    bg = {task.complete  ? "green.200": '#e1bf92	'}  >{task.task}</Text> </Container>
 </CardBody></Container>
 <CardFooter bg = {task.complete  ? "green.200": '#e1bf92	'} >
-<Button colorScheme = "cyan"onClick={()=>{Test(task.id)}}>Update</Button>            
+<Button colorScheme = "cyan"onClick={()=>{Test(task.id)}} mr= "10px">Update</Button>            
 
     <p>{upd && task.id == id ? <><Input bg="blue.200" onChange ={e=>{setTask(e.target.value)}} ></Input> <Button colorScheme = "green" onClick={()=>{UpdateData(task.id) }}>Save</Button></>: null} </p> 
-     {upd && task.id == id ? null : <>{task.complete == true ? "":<p>  <Button  colorScheme = "green" onClick={()=>{Test1(task.id); task.complete=true;}}>Mark as Completed</Button> </p>}<p> <Button  colorScheme = "red" onClick={()=>{Delete(task.id)}}>Delete</Button></p></>}
+     {upd && task.id == id ? null : <>{task.complete == true ? "":<p>  <Button  colorScheme = "green" onClick={()=>{Test1(task.id); task.complete=true;}} mr= "10px">Mark as Completed</Button> </p>}<p> <Button  colorScheme = "red" onClick={()=>{Delete(task.id)}}>Delete</Button></p></>}
 </CardFooter>
 </Card>
 </animated.div>:null)} 
