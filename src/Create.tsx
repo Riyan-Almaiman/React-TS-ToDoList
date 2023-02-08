@@ -11,6 +11,9 @@ function Create() {
     const[id, setID] = React.useState("")
     const[complete, setComplete] = React.useState()
     const[del, setdelete] = React.useState(true)
+    const[error, seterror] = React.useState(false)
+
+
 
     const transition = useTransition(del,{
         enter:{x:0, y:0, opacity:1},
@@ -84,7 +87,7 @@ function Create() {
       }
     async function PostData():Promise<any>{
 
-        if(task=="")return
+        if(task==""){seterror(true); return;} else{seterror(false) 
       await  axios.post("https://63e208d4ad0093bf29c65b2d.mockapi.io/ToDo", {
 
         task,
@@ -104,7 +107,7 @@ function Create() {
 
         })
     
-        setTask("")
+        setTask("")}
 
 
      
@@ -148,7 +151,8 @@ function Create() {
 
         <p><Input bg = "white"mt = "44px" value={task} onChange ={e=>{setTask(e.target.value)}} placeholder="Task" ></Input></p>
 
-        <Button mb= "20px"width="30%" mt = "20px"ml="35%" onClick={()=>PostData()} >Create Task</Button>    </Container>
+        <Button mb= "20px"width="30%" mt = "20px"ml="35%" onClick={()=>PostData()} >Create Task</Button>   {error ? <Text fontSize={'2xl'} color="red"> Please enter a Task</Text> : ""}
+   </Container>
         {tasks.map((task)=>{
 
 
