@@ -143,7 +143,7 @@ return(
   <CardFooter>
   <Button colorScheme = "cyan"onClick={()=>{Test(task.id)}}>Update</Button>            
 
-            <p>{upd && task.id == id ? <><Input bg="blue.200" onChange ={e=>{setTask(e.target.value)}} ></Input> <Button colorScheme = "green" onClick={()=>{UpdateData(task.id) }}>Save</Button></>: null} </p>  <p> <Button  colorScheme = "green" onClick={()=>{Test1(task.id); task.complete=true;}}>Mark as Completed</Button> </p><p> <Button  colorScheme = "red" onClick={()=>{Delete(task.id)}}>Delete</Button></p>
+            <p>{upd && task.id == id ? <><Input bg="blue.200" onChange ={e=>{setTask(e.target.value)}} ></Input> <Button colorScheme = "green" onClick={()=>{UpdateData(task.id) }}>Save</Button></>: null} </p>  {upd && task.id == id ? null : <><p> <Button  colorScheme = "green" onClick={()=>{Test1(task.id); task.complete=true;}}>Mark as Completed</Button> </p><p> <Button  colorScheme = "red" onClick={()=>{Delete(task.id)}}>Delete</Button></p></>}
   </CardFooter>
 </Card> </Container>
              
