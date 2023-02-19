@@ -24,7 +24,7 @@ function Create() {
     const[tasks, setTasks] = React.useState<any[]>([])
 
     React.useEffect( ()=> {   
-        axios.get("https://63e208d4ad0093bf29c65b2d.mockapi.io/ToDo")
+        axios.get("https://63f173495b7cf4107e319bd4.mockapi.io/ToDo")
         .then(response=>{
             console.log(response.data)
             setTasks([...response.data])
@@ -38,11 +38,11 @@ function Create() {
         setID(id)
         setdelete(false)
 
-        await  axios.delete("https://63e208d4ad0093bf29c65b2d.mockapi.io/ToDo"+"/"+i)
+        await  axios.delete("https://63f173495b7cf4107e319bd4.mockapi.io/ToDo"+"/"+i)
           
           console.log(tasks) 
   
-         await axios.get("https://63e208d4ad0093bf29c65b2d.mockapi.io/ToDo")
+         await axios.get("https://63f173495b7cf4107e319bd4.mockapi.io/ToDo")
           .then(response=>{
               console.log(response.data)
               setTasks([...response.data])
@@ -59,7 +59,7 @@ function Create() {
     async function UpdateData(i:any):Promise<any>{
 
         setID("")
-        await  axios.put("https://63e208d4ad0093bf29c65b2d.mockapi.io/ToDo"+"/"+i, {
+        await  axios.put("https://63f173495b7cf4107e319bd4.mockapi.io/ToDo"+"/"+i, {
   
           task,
           complete
@@ -69,7 +69,7 @@ function Create() {
           
           console.log(tasks) 
   
-         await axios.get("https://63e208d4ad0093bf29c65b2d.mockapi.io/ToDo")
+         await axios.get("https://63f173495b7cf4107e319bd4.mockapi.io/ToDo")
           .then(response=>{
               console.log(response.data)
               setTasks([...response.data])
@@ -88,7 +88,7 @@ function Create() {
     async function PostData():Promise<any>{
 
         if(task==""){seterror(true); return;} else{seterror(false) 
-      await  axios.post("https://63e208d4ad0093bf29c65b2d.mockapi.io/ToDo", {
+      await  axios.post("https://63f173495b7cf4107e319bd4.mockapi.io/ToDo", {
 
         task,
         complete
@@ -98,7 +98,7 @@ function Create() {
         
         console.log(tasks) 
 
-       await axios.get("https://63e208d4ad0093bf29c65b2d.mockapi.io/ToDo")
+       await axios.get("https://63f173495b7cf4107e319bd4.mockapi.io/ToDo")
         .then(response=>{
             console.log(response.data)
             setTasks([...response.data])
@@ -123,7 +123,7 @@ function Create() {
    async function Test1(i:string){
 
         
-        await  axios.put("https://63e208d4ad0093bf29c65b2d.mockapi.io/ToDo"+"/"+i, {
+        await  axios.put("https://63f173495b7cf4107e319bd4.mockapi.io/ToDo"+"/"+i, {
   
         complete:true
 
@@ -132,7 +132,7 @@ function Create() {
         
         console.log(tasks) 
 
-       await axios.get("https://63e208d4ad0093bf29c65b2d.mockapi.io/ToDo")
+       await axios.get("https://63f173495b7cf4107e319bd4.mockapi.io/ToDo")
         .then(response=>{
             console.log(response.data)
             setTasks([...response.data])
